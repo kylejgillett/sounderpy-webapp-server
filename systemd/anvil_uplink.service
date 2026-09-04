@@ -1,0 +1,22 @@
+[Unit]
+Description=SounderPy Anvil Uplink Server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+
+WorkingDirectory=/root/sounderpy-sounding-server
+
+ExecStart=/root/sounderpy-sounding-server/venv/bin/python /root/sounderpy-sounding-server/server.py
+
+EnvironmentFile=/etc/sounderpy-sounding-server.env
+
+Restart=always
+RestartSec=10
+
+# Make Python logging immediately visible in journalctl
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
